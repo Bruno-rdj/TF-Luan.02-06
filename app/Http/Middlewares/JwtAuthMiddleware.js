@@ -13,10 +13,17 @@ export default (request, response, next) => {
 
     try {
         const userDecoded = jwt.verify(token, process.env.JWT_SECRET);
-        request.user = userDecoded; // manda o user pra frente
-        return next(); // segue para a próxima função da rota
+        request.user = userDecoded;
+        return next();
     } catch (err) {
-        return response.status(401).json({ error: 'Token inválido ou expirado' });
+        if (err.name === 'TokenExpiredError') {
+            return response.status(401).json({ error: 'Token expirado' });
+        } else if (err.name === 'JsonWebTokenError') {
+            return response.status(401).json({ error: 'Token inválido' });
+        } else {
+            return response.status(401).json({ error: 'Erro' });
+        }
+
     }
 
 }

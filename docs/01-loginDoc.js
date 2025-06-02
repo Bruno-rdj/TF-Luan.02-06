@@ -1,5 +1,5 @@
 export default {
-    "/api/login": {
+    "/login": {
         "post": {
             "summary": "Autenticação de usuário",
             "description": "Realiza o login do usuário e retorna um token JWT para autenticação.",
