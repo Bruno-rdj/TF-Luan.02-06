@@ -14,8 +14,7 @@ export default (request, response, next) => {
     try {
         const userDecoded = jwt.verify(token, process.env.JWT_SECRET);
         request.user = userDecoded; // manda o user pra frente
-        console.log(userDecoded);
-        next(); // segue para a próxima função da rota
+        return next(); // segue para a próxima função da rota
     } catch (err) {
         return response.status(401).json({ error: 'Token inválido ou expirado' });
     }

@@ -17,6 +17,6 @@ export default (request, response, next) => {
             .json({ error: `Tipo de arquivo inválido: ${extensao}` });
     }
 
-    next();
+    return next();
 
 }

@@ -8,8 +8,6 @@ export default async (request, response) => {
     const email = request.body.email;
     const senha = request.body.senha;
 
-    console.log(request.query);
-
     const JWT_SECRET = process.env.JWT_SECRET;
     const JWT_EXPIRES_IN = '10m';
 

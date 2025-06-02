@@ -1,7 +1,13 @@
 export default (request, response, next) => {
 
-    console.log(request.body);
+    if (request.user) {
+        console.info("----------------");
+        console.info(request.user.email, request.method, request.originalUrl);
+        console.info("----------------");
+    }
 
-    next();
+
+
+    return next();
 
 }

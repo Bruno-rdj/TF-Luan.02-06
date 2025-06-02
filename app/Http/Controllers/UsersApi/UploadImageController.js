@@ -8,6 +8,12 @@ export default async (request, response) => {
     const arquivo = request.files.image;
     const idUser = request.user.id;
 
+    if (!idUser) {
+        return response
+            .status(CONSTANTS.HTTP.NOT_FOUND)
+            .json({ error: 'Usuário não encontrado' });
+    }
+
     const newName = `${Date.now()}_${arquivo.name.replace(/\s+/g, '_')}`;
 
     const caminho = CONSTANTS.DIR + `/storage/images/${newName}`;

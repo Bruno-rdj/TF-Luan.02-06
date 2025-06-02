@@ -7,6 +7,7 @@ import JwtAuthMiddleware from '../app/Http/Middlewares/JwtAuthMiddleware.js';
 import LoginJwtController from '../app/Http/Controllers/LoginJwtController.js';
 import fileUpload from 'express-fileupload';
 import CriarUsuariosController from '../app/Http/Controllers/CriarUsuariosController.js';
+import LogMiddleware from '../app/Http/Middlewares/LogMiddleware.js';
 
 export default (function () {
 
@@ -20,7 +21,7 @@ export default (function () {
     router.use(fileUpload());
 
     // Apis
-    router.use('/api', JwtAuthMiddleware, api);
+    router.use('/api', JwtAuthMiddleware, LogMiddleware, api);
     router.post('/login', LoginJwtController);
     router.get('/criar-usuarios', CriarUsuariosController);
 
