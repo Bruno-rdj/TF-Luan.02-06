@@ -1,20 +1,11 @@
 export default {
-    "/api/users/{id}/image": {
+    "/api/users/image": {
         "post": {
             "summary": "Upload de imagem de perfil",
             "description": "Faz o upload de uma imagem de perfil para um usuário específico. A imagem será salva no servidor e o campo `foto` do usuário será atualizado no banco de dados. Apenas arquivos com extensões permitidas serão aceitos.",
             "tags": ["Usuários"],
             "parameters": [
-                {
-                    "name": "id",
-                    "in": "path",
-                    "required": true,
-                    "description": "ID do usuário para o qual a imagem será enviada",
-                    "schema": {
-                        "type": "integer",
-                        "example": 1
-                    }
-                }
+
             ],
             "requestBody": {
                 "required": true,

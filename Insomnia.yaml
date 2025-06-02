@@ -533,12 +533,12 @@ collection:
       modified: 1748826163534
       sortKey: -1747906794329.375
     children:
-      - url: http://localhost:8080/api/users/1/image
+      - url: http://localhost:8080/api/users/image
         name: Enviar foto
         meta:
           id: req_6508122787bf4fdeb473f46138c02164
           created: 1748826163538
-          modified: 1748867323637
+          modified: 1748872058314
           isPrivate: false
           sortKey: -1748023025581
         method: POST

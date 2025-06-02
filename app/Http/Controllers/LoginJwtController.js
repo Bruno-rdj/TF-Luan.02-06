@@ -39,7 +39,7 @@ export default async (request, response) => {
 
         // 3. Gerar JWT
         const payload = {
-            sub: userModel.id,
+            id: userModel.id,
             email: userModel.email,
             nome: userModel.nome,
             roles: userModel.role.nome

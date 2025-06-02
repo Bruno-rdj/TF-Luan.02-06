@@ -6,7 +6,7 @@ export default (function () {
 
     const router = Router();
 
-    router.post('/users/:id/image', VerifyImage, UploadImageController);
+    router.post('/users/image', VerifyImage, UploadImageController);
 
     return router;
 

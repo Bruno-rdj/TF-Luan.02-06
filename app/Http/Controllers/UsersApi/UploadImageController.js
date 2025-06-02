@@ -1,12 +1,12 @@
 import UserModel from "../../../Models/UserModel.js";
 
-//POST /api/users/:id/image
+//POST /api/users/image
 //multiform data
 //express file-upload
 export default async (request, response) => {
 
     const arquivo = request.files.image;
-    const idUser = request.params.id;
+    const idUser = request.user.id;
 
     const newName = `${Date.now()}_${arquivo.name.replace(/\s+/g, '_')}`;
 
