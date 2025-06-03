@@ -4,6 +4,7 @@ import ProjetoModel from '../app/Models/ProjetoModel.js';
 import RoleModel from '../app/Models/RoleModel.js';
 import TodoModel from '../app/Models/TodoModel.js';
 import UserModel from '../app/Models/UserModel.js';
+import DocumentoModel from '../app/Models/DocumentoModel.js';
 
 export default () => {
 
@@ -39,6 +40,17 @@ export default () => {
     RoleModel.hasMany(UserModel, {
         foreignKey: "id_role",
         as: "users"
+    });
+    
+    // Relação entre User e Documento (1:N)
+    UserModel.hasMany(DocumentoModel, {
+        foreignKey: "id_user",
+        as: "documentos"
+    });
+
+    DocumentoModel.belongsTo(UserModel, {
+        foreignKey: "id_user",
+        as: "usuario"
     });
 
 }

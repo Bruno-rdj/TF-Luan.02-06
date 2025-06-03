@@ -5,6 +5,7 @@ import todosApi from './api/todosApi.js';
 import colaboradoresProjetosApi from './api/colaboradoresProjetosApi.js';
 import projetosApi from './api/projetosApi.js';
 import usersApi from './api/usersApi.js';
+import documentosApi from './api/documentosApi.js';
 
 export default (function () {
 
@@ -24,6 +25,9 @@ export default (function () {
 
     //Users
     router.use("/", usersApi);
+
+    // Documentos
+    router.use("/", documentosApi);
 
     return router;
 
