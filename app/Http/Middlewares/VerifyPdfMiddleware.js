@@ -10,9 +10,16 @@ export default (request, response, next) => {
     const arquivo = request.files.documento;
     const extensao = path.extname(arquivo.name).toLowerCase();
 
-    if (extensao !== '.pdf') {
+    // Verificar extensão do arquivo
+    if (!CONSTANTS.UPLOAD.ALLOWED_EXTENSIONS.includes(extensao)) {
         return response.status(CONSTANTS.HTTP.BAD_REQUEST)
             .json({ error: 'Apenas arquivos PDF são permitidos' });
+    }
+
+    // Verificar tamanho do arquivo
+    if (arquivo.size > CONSTANTS.UPLOAD.MAX_FILE_SIZE) {
+        return response.status(CONSTANTS.HTTP.BAD_REQUEST)
+            .json({ error: `Tamanho máximo permitido é ${Math.floor(CONSTANTS.UPLOAD.MAX_FILE_SIZE / (1024 * 1024))}MB` });
     }
 
     return next();

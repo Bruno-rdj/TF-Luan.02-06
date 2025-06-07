@@ -1,68 +1,52 @@
-# Unifaat :: Devweb :: Aula 13 - Middlewares, Segurança, Form Data e Swagger
+# Projeto de Upload de Documentos
 
-## Instalação e Execução
+Este projeto implementa uma API para upload de documentos PDF com autenticação JWT.
 
-### Siga os passos abaixo para rodar o projeto via Docker:
+## Configuração do Ambiente
 
-1. Clonar o repositório:
-
-   ```sh
-   git clone https://github.com/luan-tavares/unifaat-devweb-aula13-middleware-formdata-swagger
+1. **Instalar dependências**:
+   ```bash
+   npm install
    ```
 
-2. Entrar na pasta do projeto:
+2. **Configurar o arquivo .env**:
+   - Copie o arquivo `.env.example` para `.env`
+   - Configure o `JWT_SECRET` com um valor seguro
+   - Configure o `MAX_FILE_SIZE` para definir o tamanho máximo de upload (em bytes)
 
-   ```sh
-   cd unifaat-devweb-aula13-middleware-formdata-swagger
+3. **Iniciar o ambiente Docker**:
+   ```bash
+   docker-compose up -d
    ```
 
-3. Criar o arquivo `.env` na raiz do projeto copiando o .env.example:
+## Funcionalidades
 
-   > No windows:
+- Autenticação JWT
+- Upload de documentos PDF
+- Validação de tipo e tamanho de arquivo
+- Armazenamento seguro de documentos
+- API RESTful documentada com Swagger
 
-   ```ini
-   copy .env.example .env
-   ```
+## Documentação
 
-   > No linux
-
-   ```ini
-   cp .env.example .env
-   ```
-4. Abrir o arquivo .env recém criado e preencher os campos abaixo:
-
-```sh
-POSTGRES_USER=meu_usuario
-POSTGRES_PASSWORD=minha_senha
-JWT_SECRET=super_secreta
+A documentação da API pode ser acessada em:
+```
+http://localhost:8080/docs
 ```
 
-5. Subir a aplicação com Docker Compose:
+## Segurança
 
-   ```sh
-   docker compose up --build
-   ```
+- Validação de tipo de arquivo (apenas PDF)
+- Limite de tamanho de arquivo
+- Sanitização de nomes de arquivos
+- Autenticação JWT para todas as rotas da API
+- Configuração CORS para controle de acesso
 
-   > ou, dependendo da versão do Docker:
-   >
-   > - Usuários com versões **mais antigas** ou com Docker Compose instalado separadamente usam:
+## Estrutura do Projeto
 
-   ```sh
-   docker-compose up --build
-   ```
-
-   > - Usuários com **Docker moderno** devem usar:
-
-   ```sh
-   docker compose up --build
-   ```
-
-6. Criar os usuários acessando essa rota:
-
-   [http://localhost:8080/criar-usuarios](http://localhost:8080/criar-usuarios)
-
-O servidor estará disponível em: [http://localhost:8080](http://localhost:8080)
-
-Documentação api: [http://localhost:8080/docs](http://localhost:8080/docs)
-
-Observação: ./Insomnia.yml DEVE utilizado no insomnia
+- `/app` - Controladores, Middlewares e Modelos
+- `/bootstrap` - Inicialização da aplicação
+- `/config` - Configurações do sistema
+- `/docs` - Documentação Swagger
+- `/routes` - Definição de rotas
+- `/storage` - Armazenamento de arquivos

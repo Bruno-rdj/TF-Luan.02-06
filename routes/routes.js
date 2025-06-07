@@ -18,7 +18,26 @@ export default (function () {
 
     router.use(express.urlencoded({ extended: true }));
 
-    router.use(fileUpload());
+    // Configuração do CORS
+    router.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        
+        if (req.method === 'OPTIONS') {
+            return res.status(200).end();
+        }
+        
+        next();
+    });
+
+    // Configuração do fileUpload com limite de tamanho
+    router.use(fileUpload({
+        limits: { 
+            fileSize: process.env.MAX_FILE_SIZE || 10 * 1024 * 1024 // 10MB padrão
+        },
+        abortOnLimit: true
+    }));
 
     // Apis
     router.use('/api', JwtAuthMiddleware, LogMiddleware, api);

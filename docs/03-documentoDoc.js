@@ -1,15 +1,11 @@
 export default {
     "/api/documentos/upload": {
         "post": {
-            "tags": ["Documentos"],
             "summary": "Upload de documento PDF",
-            "description": "Realiza o upload de um arquivo PDF e associa ao usuário autenticado",
-            "security": [
-                {
-                    "bearerAuth": []
-                }
-            ],
+            "description": "Realiza o upload de um documento PDF e o associa ao usuário autenticado.",
+            "tags": ["Documentos"],
             "requestBody": {
+                "required": true,
                 "content": {
                     "multipart/form-data": {
                         "schema": {
@@ -36,22 +32,22 @@ export default {
                                 "properties": {
                                     "mensagem": {
                                         "type": "string",
-                                        "example": "Documento enviado com sucesso!"
+                                        "example": "Documento PDF enviado com sucesso!"
                                     },
                                     "documento": {
                                         "type": "object",
                                         "properties": {
                                             "id": {
                                                 "type": "integer",
-                                                "example": 1
+                                                "description": "ID do documento no banco de dados"
                                             },
                                             "nome": {
                                                 "type": "string",
-                                                "example": "1623456789_documento.pdf"
+                                                "description": "Nome do arquivo salvo"
                                             },
-                                            "usuario": {
-                                                "type": "string",
-                                                "example": "João Silva"
+                                            "usuario_id": {
+                                                "type": "integer",
+                                                "description": "ID do usuário que enviou o documento"
                                             }
                                         }
                                     }
@@ -92,24 +88,8 @@ export default {
                         }
                     }
                 },
-                "404": {
-                    "description": "Usuário não encontrado",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "error": {
-                                        "type": "string",
-                                        "example": "Usuário não encontrado"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 "500": {
-                    "description": "Erro interno do servidor",
+                    "description": "Erro interno no servidor",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -117,14 +97,19 @@ export default {
                                 "properties": {
                                     "error": {
                                         "type": "string",
-                                        "example": "Erro ao salvar arquivo"
+                                        "example": "Erro ao processar o upload do documento"
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
+            },
+            "security": [
+                {
+                    "bearerAuth": []
+                }
+            ]
         }
     }
 };
